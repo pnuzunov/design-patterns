@@ -1,8 +1,30 @@
+import java.util.ArrayList;
+import java.util.List;
 
-public interface Observable {
+public abstract class Observable {
+
+	protected Object message;
+	protected List<Observer> observers;
 	
-	public void attachObserver(Observer observer);
-	public void detachObserver(Observer observer);
-	public Object getMessage();
-	public void changeMessage(Object message);
+	public abstract void attachObserver(Observer observer);
+	public abstract void detachObserver(Observer observer);
+	
+	public Observable() {
+		this.observers = new ArrayList<Observer>();
+	}
+	
+	public Object getMessage() {
+		return this.message;
+	}
+	
+	public void changeMessage(Object message) {
+		this.message = message;
+		this.notifyObservers();
+	}
+	
+	protected void notifyObservers() {
+		for(Observer obs: this.observers) {
+			obs.update();
+		}
+	}
 }
