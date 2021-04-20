@@ -15,7 +15,12 @@ public class ChatMediator implements Mediator {
 		
 	}
 
-	public void sendMessage(String message, User sender) {
+	/**
+	 * Processes the message from the sender. 
+	 * @param message : The message from the sender.
+	 * @param sender : The sender of the message.
+	 */
+	public void processMessage(String message, User sender) {
 		
 		boolean isMessageForbidden = isMessageForbidden(message);
 		if(isMessageForbidden) {
@@ -46,6 +51,12 @@ public class ChatMediator implements Mediator {
 		
 	}
 
+	/**
+	 * Sends a message to all chat users except the sender.
+	 * @param systemMessage : A flag indicating if the message is a system message or is sent by a chat user.
+	 * @param message : The message the chat users will receive.
+	 * @param sender : The sender of the message (or the invoker of the system message).
+	 */
 	private void sendMessageToAll(boolean systemMessage, String message, User sender) {
 		for(User user: users) {
 			
@@ -59,6 +70,12 @@ public class ChatMediator implements Mediator {
 		System.out.println();
 	}
 	
+	/**
+	 * Sends a message to the sender of the last message.
+	 * @param systemMessage : A flag indicating if the message is a system message or is sent by a chat user.
+	 * @param message : The message the chat users will receive.
+	 * @param sender : The sender of the message (or the invoker of the system message).
+	 */
 	private void sendMessageToSender(boolean systemMessage, String message, User sender) {
 		if(!systemMessage)
 			System.out.println(sender.getName() + ": " + message);
@@ -67,15 +84,29 @@ public class ChatMediator implements Mediator {
 		System.out.println();
 	}
 	
-	private void removeUser(User sender) {
-		this.users.remove(sender);
+	/**
+	 * Removes the user from the chat.
+	 * @param user : The user to be removed.
+	 */
+	private void removeUser(User user) {
+		this.users.remove(user);
+		user.removeFromChat();
 	}
 
+	/**
+	 * Adds a chatbot to the chat.
+	 * @param forbiddenWord : Sets a forbidden word for the chat.
+	 */
 	public void addChatBot(String forbiddenWord) {
 		chatBot = ChatBot.getInstance();
 		chatBot.setForbiddenWord(forbiddenWord);
 	}
 
+	/**
+	 * Asks the chatbot whether the message sent has any forbidden words.
+	 * @param message : The message that was sent.
+	 * @return <b>True</b> if the message contains a forbidden word, <b>false</b> otherwise.
+	 */
 	private boolean isMessageForbidden(String message) {
 		if(chatBot == null)
 			return false;

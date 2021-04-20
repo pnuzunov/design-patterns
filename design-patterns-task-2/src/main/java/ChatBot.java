@@ -22,7 +22,12 @@ public class ChatBot {
 	public void setForbiddenWord(String word) {
 		instance.forbiddenWord = word;
 	}
-		
+	
+	/**
+	 * Checks if a message contains a forbidden word.
+	 * @param message : The message.
+	 * @return <b>True</b> if the message contains a forbidden word, <b>false</b> otherwise.
+	 */
 	public boolean isMessageForbidden(String message) {
 		String[] words = message.split(" ");
 		for(String word: words) {

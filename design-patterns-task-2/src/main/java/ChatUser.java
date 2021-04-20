@@ -7,6 +7,12 @@ public class ChatUser extends User {
 
 	@Override
 	public void sendMessage(String message) {
-		this.chat.sendMessage(message, this);
+		if(this.chat != null)
+			this.chat.processMessage(message, this);
+	}
+	
+	@Override
+	public void removeFromChat() {
+		this.chat = null;
 	}
 }

@@ -10,6 +10,8 @@ public abstract class User {
 	}
 		
 	public abstract void sendMessage(String message);
+
+	public abstract void removeFromChat();
 	
 	public String getName() {
 		return name;

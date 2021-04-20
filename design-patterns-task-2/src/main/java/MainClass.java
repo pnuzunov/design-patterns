@@ -16,6 +16,7 @@ public class MainClass {
 		user2.sendMessage("addBot");
 		user2.sendMessage("hi everyone");
 		user3.sendMessage("hi wanna see my cat");
+		user3.sendMessage("oh no sorry");
 	}
 
 }
