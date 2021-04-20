@@ -25,13 +25,10 @@ public class ChatMediator implements Mediator {
 		boolean isMessageForbidden = isMessageForbidden(message);
 		if(isMessageForbidden) {
 			
-			this.removeUser(sender);
-			this.sendMessageToSender(true, "You have been removed from the chat for using a forbidden word: "
-											+ chatBot.getForbiddenWord() + "\'", sender);
-			
 			this.sendMessageToAll(true, sender.getName() +
 							" has been removed from the chat for using a forbidden word: \'" 
 							+ chatBot.getForbiddenWord() + "\'", sender);
+			this.removeUser(sender);
 			return;
 		}
 		
