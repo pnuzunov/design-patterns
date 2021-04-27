@@ -23,7 +23,7 @@ public class ChatMediator implements Mediator {
 	public void processMessage(String message, User sender) {
 		
 		boolean isMessageForbidden = isMessageForbidden(message);
-		if(isMessageForbidden) {
+		if(chatBot != null && isMessageForbidden) {
 			
 			this.sendMessageToAll(true, sender.getName() +
 							" has been removed from the chat for using a forbidden word: \'" 
@@ -105,8 +105,6 @@ public class ChatMediator implements Mediator {
 	 * @return <b>True</b> if the message contains a forbidden word, <b>false</b> otherwise.
 	 */
 	private boolean isMessageForbidden(String message) {
-		if(chatBot == null)
-			return false;
 		return chatBot.isMessageForbidden(message);
 	}
 	

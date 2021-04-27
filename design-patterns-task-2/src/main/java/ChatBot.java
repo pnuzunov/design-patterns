@@ -5,7 +5,7 @@ public class ChatBot {
 	private String forbiddenWord;
 	
 	private ChatBot() {
-		
+		forbiddenWord = "";
 	}
 	
 	public static ChatBot getInstance() {
@@ -26,12 +26,12 @@ public class ChatBot {
 	/**
 	 * Checks if a message contains a forbidden word.
 	 * @param message : The message.
-	 * @return <b>True</b> if the message contains a forbidden word, <b>false</b> otherwise.
+	 * @return <b>True</b> if the message contains a forbidden word, <b>False</b> otherwise.
 	 */
 	public boolean isMessageForbidden(String message) {
 		String[] words = message.split(" ");
 		for(String word: words) {
-			if("cat".equals(word)) {
+			if(forbiddenWord.equals(word)) {
 				return true;
 			}
 		}
